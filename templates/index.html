@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}BloodBridge — Home{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+
+    <div>
+        <span class="pill">COMMUNITY BLOOD NETWORK</span>
+
+        <h1>Every drop can make a difference.</h1>
+
+        <p>
+            Find available blood donors or post a blood request
+            quickly and easily.
+        </p>
+
+        <div class="actions">
+            <a href="{{ url_for('donors') }}" class="btn primary">
+                Find a Donor
+            </a>
+
+            <a href="{{ url_for('request_blood') }}" class="btn secondary">
+                Request Blood
+            </a>
+        </div>
+    </div>
+
+    <div class="hero-card">
+        <div class="drop">🩸</div>
+        <h3>Fast Connection</h3>
+        <p>Search donors by blood group and city.</p>
+    </div>
+
+</section>
+
+
+<section class="section">
+
+    <h2>Available Donors</h2>
+
+    <div class="cards">
+
+        {% for donor in donors %}
+
+        <div class="card">
+
+            <div class="group">
+                {{ donor.blood_group }}
+            </div>
+
+            <h3>{{ donor.name }}</h3>
+
+            <p>📍 {{ donor.city }}</p>
+
+            <p>📞 {{ donor.phone }}</p>
+
+            <span class="available">
+                ● Available
+            </span>
+
+        </div>
+
+        {% else %}
+
+        <p>No donors registered yet.</p>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+
+<section class="section">
+
+    <h2>Open Blood Requests</h2>
+
+    <div class="cards">
+
+        {% for request in requests %}
+
+        <div class="card request">
+
+            <div class="group">
+                {{ request.blood_group }}
+            </div>
+
+            <h3>{{ request.hospital }}</h3>
+
+            <p>
+                Patient: {{ request.patient_name }}
+            </p>
+
+            <p>
+                📍 {{ request.city }}
+            </p>
+
+            <p>
+                🩸 {{ request.units }} unit(s)
+            </p>
+
+            <p>
+                📞 {{ request.contact }}
+            </p>
+
+        </div>
+
+        {% else %}
+
+        <p>No open blood requests.</p>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}
