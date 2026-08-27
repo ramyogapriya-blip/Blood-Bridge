@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Find Donors — BloodBridge{% endblock %}
+
+{% block content %}
+
+<section class="page-head">
+
+    <h1>Find Blood Donors</h1>
+
+    <p>
+        Search available donors using blood group and city.
+    </p>
+
+</section>
+
+
+<form method="GET" class="search">
+
+    <select name="blood_group">
+
+        <option value="">All Blood Groups</option>
+
+        {% for group_name in ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"] %}
+
+        <option value="{{ group_name }}"
+            {% if group == group_name %}selected{% endif %}>
+
+            {{ group_name }}
+
+        </option>
+
+        {% endfor %}
+
+    </select>
+
+
+    <input
+        type="text"
+        name="city"
+        value="{{ city }}"
+        placeholder="Enter city"
+    >
+
+
+    <button type="submit" class="btn primary">
+        Search
+    </button>
+
+</form>
+
+
+<div class="cards">
+
+    {% for donor in donors %}
+
+    <div class="card">
+
+        <div class="group">
+            {{ donor.blood_group }}
+        </div>
+
+        <h3>{{ donor.name }}</h3>
+
+        <p>📍 {{ donor.city }}</p>
+
+        <p>📞 {{ donor.phone }}</p>
+
+        <span class="available">
+            ● Available
+        </span>
+
+    </div>
+
+    {% else %}
+
+    <div class="empty">
+        No matching donors found.
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}
