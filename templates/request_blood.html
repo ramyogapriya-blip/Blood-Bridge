@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Request Blood — BloodBridge{% endblock %}
+{% block content %}
+<div class="form-wrap">
+<h1>Request Blood</h1><p>Post a request for community donors to discover.</p>
+<form method="post">
+<label>Patient Name<input name="patient_name" required></label>
+<label>Blood Group<select name="blood_group" required><option value="">Select</option>{% for g in ["A+","A-","B+","B-","AB+","AB-","O+","O-"] %}<option>{{g}}</option>{% endfor %}</select></label>
+<label>City<input name="city" required></label>
+<label>Hospital<input name="hospital" required></label>
+<label>Units Required<input type="number" min="1" name="units" required></label>
+<label>Contact Number<input name="contact" required></label>
+<button class="btn primary" type="submit">Post Request</button>
+</form>
+</div>
+{% endblock %}
