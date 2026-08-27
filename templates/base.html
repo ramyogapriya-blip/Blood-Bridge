@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}BloodBridge{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<nav>
+    <a href="{{ url_for('home') }}" class="brand">🩸 BloodBridge</a>
+
+    <div class="navlinks">
+        <a href="{{ url_for('donors') }}">Find Donors</a>
+        <a href="{{ url_for('add_donor') }}">Become a Donor</a>
+        <a href="{{ url_for('request_blood') }}">Request Blood</a>
+        <a href="{{ url_for('about') }}">About</a>
+    </div>
+</nav>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}
+        <div class="flash {{ category }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endwith %}
+
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer>
+    BloodBridge • Connecting donors with people in need
+</footer>
+
+</body>
+</html>
